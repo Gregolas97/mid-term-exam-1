@@ -76,3 +76,27 @@ In the Sales department:
 
 
 
+WITH ranked AS (
+    SELECT
+       e.id,
+       e.name AS employee,
+       e.salary,
+       d.name AS department,
+       RANK() OVER (
+         PARTITION BY
+            e.departmentId
+         ORDER BY
+            e.salary DESC
+        ) AS salary_rank
+    FROM
+        Employee e LEFT JOIN Department d ON e.departmentId = d.id
+)
+SELECT
+    department,
+    employee,
+    salary
+FROM
+    ranked
+WHERE
+    salary_rank <= 3;
+kvm
