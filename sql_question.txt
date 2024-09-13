@@ -72,7 +72,16 @@ In the Sales department:
 - Sam earns the second-highest salary
 - There is no third-highest salary as there are only two employees
 
-
-
-
-
+Query: select d.name as Department, e.name as Employee, e.salary as Salary, Rank() OVER (PARTITION BY d.id ORDER BY e.salary DESC) as Employee_rank from Employee e LEFT JOIN Department d ON e.departmentId = d.id WHERE Employee_rank <= 3;
+{
+  "ip": "34.127.108.3",
+  "hostname": "3.108.127.34.bc.googleusercontent.com",
+  "city": "The Dalles",
+  "region": "Oregon",
+  "country": "US",
+  "loc": "45.5946,-121.1787",
+  "org": "AS396982 Google LLC",
+  "postal": "97058",
+  "timezone": "America/Los_Angeles",
+  "readme": "https://ipinfo.io/missingauth"
+}
