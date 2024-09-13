@@ -73,6 +73,41 @@ In the Sales department:
 - There is no third-highest salary as there are only two employees
 
 
+ANSWER:
+
+WITH salarios_rankeados AS (
+    SELECT
+        e.id,
+        e.name,
+        e.salary,
+        e.departmentId,
+        d.name AS department,
+        DENSE_RANK() OVER (PARTITION BY e.departmentId ORDER BY e.salary DESC) AS rankS
+    FROM
+        Employee e
+    JOIN
+        Department d ON e.departmentId = d.id
+)
+SELECT
+    r.department,
+    r.name AS Employee,
+    r.salary
+FROM
+    Salarios_rankeados r
+WHERE
+    r.rankS <= 3;
 
 
-
+Me costo profe :)
+{
+  "ip": "34.168.210.130",
+  "hostname": "130.210.168.34.bc.googleusercontent.com",
+  "city": "The Dalles",
+  "region": "Oregon",
+  "country": "US",
+  "loc": "45.5946,-121.1787",
+  "org": "AS396982 Google LLC",
+  "postal": "97058",
+  "timezone": "America/Los_Angeles",
+  "readme": "https://ipinfo.io/missingauth"
+}
