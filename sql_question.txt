@@ -76,3 +76,12 @@ In the Sales department:
 
 
 
+WITH rankeada AS(
+    SELECT 
+    dep.name as nombre_depa, em.name as nombre_empleado, em.salary as salario,
+    RANK() OVER (PARTITION BY dep.id ORDER BY em.salary DESC) AS ranking
+FROM Employee em
+JOIN Department dep ON em.departmentId = dep.id)
+SELECT nombre_depa, nombre_empleado, salario
+FROM rankeada
+WHERE ranking <= 3
