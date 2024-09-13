@@ -76,3 +76,8 @@ In the Sales department:
 
 
 
+SELECT d.name AS Department, e.name AS Employe, e.salary AS Salary                
+FROM Employee e JOIN Department d ON e.departement = d.id WHERE e.salary>= 
+SELECT DISTINCT salary FROM Employee e WHERE e.departmentId=e.departmetId ORDER BY salary DESC
+ORDER BY d.name, e.salary DESC;
+34.145.117.228
