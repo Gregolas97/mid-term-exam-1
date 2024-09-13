@@ -72,7 +72,30 @@ In the Sales department:
 - Sam earns the second-highest salary
 - There is no third-highest salary as there are only two employees
 
+Result:
 
+WITH rank_salaries AS (
+SELECT d.name as department, e.name as employee, e.salary as salary
+RANK() OVER (PARTITION BY e.departmentid ORDER BY e.salary DESC) as salary_rank
+FROM employee e, department d
+WHERE e.departmentid = d.id
+)
+SELECT department, employee, salary
+FROM rank_salaries
+WHERE salary_rank <= 3
+ORDER BY department, salary DESC;
 
+{
+  "ip": "34.68.98.131",
+  "hostname": "131.98.68.34.bc.googleusercontent.com",
+  "city": "Council Bluffs",
+  "region": "Iowa",
+  "country": "US",
+  "loc": "41.2619,-95.8608",
+  "org": "AS396982 Google LLC",
+  "postal": "51502",
+  "timezone": "America/Chicago",
+  "readme": "https://ipinfo.io/missingauth"
+}
 
 
