@@ -76,3 +76,16 @@ In the Sales department:
 
 
 
+ My solution to the problem:
+SELECT e.name AS employee_name, e.salary, d.name AS department_name
+FROM Employee e
+JOIN Department d ON e.departmentId = d.id
+WHERE (e.salary, e.departmentId) IN (
+    SELECT MAX(salary), departmentId
+    FROM Employee
+    GROUP BY departmentId
+);
+
+Explanation: The first step is joining the Employee table with the Department table using the foreign key departmentId
+We use a subquery to get the maximum salary for each department, grouping by the foreign key and selecting the highest salary in each group
+We then filter the employees who match the maximum salary in each department.
