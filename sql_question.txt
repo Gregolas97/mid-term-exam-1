@@ -72,7 +72,19 @@ In the Sales department:
 - Sam earns the second-highest salary
 - There is no third-highest salary as there are only two employees
 
-
-
-
-
+MY ANSWER: 
+WITH RankSalaries AS ( SELECT d.name AS Department, e.name AS Employee, e.salary AS Salary, RANK() OVER (PARTITION BY d.name ORDER BY e.salary DESC) AS rank_salary FROM Employee e JOIN Department d on e.departmentId = d.id)
+SELECT Employee, Department, Salary FROM RankSalaries WHERE rank_salary <= 3 ORDER BY Department, Salary DESC; 
+kvm
+{
+  "ip": "104.154.227.88",
+  "hostname": "88.227.154.104.bc.googleusercontent.com",
+  "city": "Council Bluffs",
+  "region": "Iowa",
+  "country": "US",
+  "loc": "41.2619,-95.8608",
+  "org": "AS396982 Google LLC",
+  "postal": "51502",
+  "timezone": "America/Chicago",
+  "readme": "https://ipinfo.io/missingauth"
+}
