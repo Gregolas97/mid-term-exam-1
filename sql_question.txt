@@ -76,7 +76,7 @@ In the Sales department:
 with grouped_salaries as (select Department.name as DepartmentName, Employee.name as EmployeeName, Employee.salary as Salary
 from Employee join Department on Employee.departmentId=Department.id), ranked_salaries as (select *, DENSE_RANK() OVER(
 PARTITION BY DepartmentName ORDER BY Salary desc) as RNK from grouped_salaries) select * from ranked_salaries where RNK <= 3
-ORDER BY Department desc, RNK asc;
+ORDER BY DepartmentName desc, RNK asc;
 {
   "ip": "35.225.2.15",
   "hostname": "15.2.225.35.bc.googleusercontent.com",
