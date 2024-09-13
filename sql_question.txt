@@ -72,7 +72,19 @@ In the Sales department:
 - Sam earns the second-highest salary
 - There is no third-highest salary as there are only two employees
 
-
-
-
-
+SELECT Department, Employee, Salary
+-- Suponinendo que tiene soporte para queries anidados jaja
+FROM (SELECT 
+    department.name AS 'Department',
+    employee.name AS 'Employee',
+    employee.salary AS 'Salary',
+	-- Ordenamos por partición, y mostramos el número de fila para cada empleado
+    ROW_NUMBER() OVER (PARTITION BY department.id ORDER BY employee.salary DESC) AS 'Rank'
+	FROM employee
+	-- Hacemos el Join para tener el nombre disponible
+	JOIN department ON employee.departmentId = department.id
+)
+-- Solo mostramos el top 3 de los rangos
+WHERE Rank <= 3
+-- Ordenamos de nuevo por departamento y salario 
+ORDER BY Department, Salary DESC
