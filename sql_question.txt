@@ -73,6 +73,24 @@ In the Sales department:
 - There is no third-highest salary as there are only two employees
 
 
+SELECT departmentName, employeeName, salary  FROM(
+SELECT employeeName, salary, departmentName, RANK() OVER (PARTITION BY departmentName ORDER BY salary DESC ) as ranking_salary  FROM(
+SELECT e.name as employeeName, e.salary as salary, d.name as departmentName FROM Employee e, Department d
+WHERE e.departmentId = d.id) AS CombiningTable) AS FinalTable
+WHERE ranking_salary <=4;
 
 
 
+
+{
+  "ip": "35.230.124.126",
+  "hostname": "126.124.230.35.bc.googleusercontent.com",
+  "city": "The Dalles",
+  "region": "Oregon",
+  "country": "US",
+  "loc": "45.5946,-121.1787",
+  "org": "AS396982 Google LLC",
+  "postal": "97058",
+  "timezone": "America/Los_Angeles",
+  "readme": "https://ipinfo.io/missingauth"
+}
