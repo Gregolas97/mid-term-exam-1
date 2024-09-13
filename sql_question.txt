@@ -8,7 +8,7 @@ Table: Employee
 | departmentId | int     |
 +--------------+---------+
 id is the primary key (column with unique values) for this table.
-departmentId is a foreign key (reference column) of the ID from the Department table.
+departmentId is a foreign key (reference column) of the ID from the Department table
 Each row of this table indicates the ID, name, and salary of an employee. It also contains the ID of their department.
 
 
@@ -23,14 +23,15 @@ id is the primary key (column with unique values) for this table.
 Each row of this table indicates the ID of a department and its name.
 
 
-A company's executives are interested in seeing who earns the most money in each of the company's departments. A high earner in a department is an employee who has a salary in the top three unique salaries for that department.
+A company's executives are interested in seeing who earns the most money in each of the company's departments.
+A high earner in a department is an employee who has a salary in the top three unique salaries for that department.
 
 Write a solution to find the employees who are high earners in each of the departments.
 
 Return the result table in any order.
 
 
-Input: 
+Input:
 Employee table:
 +----+-------+--------+--------------+
 | id | name  | salary | departmentId |
@@ -72,7 +73,27 @@ In the Sales department:
 - Sam earns the second-highest salary
 - There is no third-highest salary as there are only two employees
 
+select 
+	Department.name as department, Employee.name as employee, Employee.salary as salary,
+	rank() 
+		over(partition by Department.name order by Employee.salary limit by 3)
+from 
+	Employee,Department 
+where 
+	Employee.departmentId = Department.id
 
 
 
 
+{
+  "ip": "35.247.98.230",
+  "hostname": "230.98.247.35.bc.googleusercontent.com",
+  "city": "The Dalles",
+  "region": "Oregon",
+  "country": "US",
+  "loc": "45.5946,-121.1787",
+  "org": "AS396982 Google LLC",
+  "postal": "97058",
+  "timezone": "America/Los_Angeles",
+  "readme": "https://ipinfo.io/missingauth"
+}
