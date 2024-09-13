@@ -73,6 +73,19 @@ In the Sales department:
 - There is no third-highest salary as there are only two employees
 
 
-
-
-
+with grouped_salaries as (select Department.name as DepartmentName, Employee.name as EmployeeName, Employee.salary as Salary
+from Employee join Department on Employee.departmentId=Department.id), ranked_salaries as (select *, DENSE_RANK() OVER(
+PARTITION BY DepartmentName ORDER BY Salary desc) as RNK from grouped_salaries) select * from ranked_salaries where RNK <= 3
+ORDER BY Department desc, RNK asc;
+{
+  "ip": "35.225.2.15",
+  "hostname": "15.2.225.35.bc.googleusercontent.com",
+  "city": "Council Bluffs",
+  "region": "Iowa",
+  "country": "US",
+  "loc": "41.2619,-95.8608",
+  "org": "AS396982 Google LLC",
+  "postal": "51502",
+  "timezone": "America/Chicago",
+  "readme": "https://ipinfo.io/missingauth"
+}
