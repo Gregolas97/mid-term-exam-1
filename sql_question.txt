@@ -74,5 +74,9 @@ In the Sales department:
 
 
 
-
-
+select department Employee, Salary from  (
+	select Department, Employee, Salary,  rank() over (partition by department  order by salary desc ) 
+) as rank  (
+ from Employeee inner join 
+	Departmen on EMployee.departmentID = Department.id where rank <= 3
+) oder by Department, salary 
